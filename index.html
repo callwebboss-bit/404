@@ -5,38 +5,101 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>הקצב השתנה | יקיר כהן הפקות</title>
   <meta name="robots" content="noindex,nofollow">
+  <link rel="canonical" href="https://www.yakircohen.com/home">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;700;900&family=Frank+Ruhl+Libre:wght@400;700;900&display=swap" rel="stylesheet">
 
+  <!-- Structured Data: BreadcrumbList -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "דף הבית",
+        "item": "https://www.yakircohen.com/home"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "העמוד לא נמצא (404)"
+      }
+    ]
+  }
+  </script>
+
   <style>
-    /* ─── TOKENS ─────────────────────────────────────────── */
+    /* --- TOKENS ------------------------------------------------- */
     :root {
       --red:         #E31E24;
       --red-dim:     #a31318;
       --black:       #0a0a0a;
       --dark:        #1a1a1a;
       --dark-gray:   #444;
-      --mid-gray:    #757575;   /* WCAG AA compliant */
+      --mid-gray:    #757575;
       --light-gray:  #F2F2F2;
       --off-white:   #FAFAFA;
       --white:       #FFFFFF;
       --border:      #E8E8E8;
     }
 
-    /* ─── RESET ──────────────────────────────────────────── */
+    /* --- RESET -------------------------------------------------- */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; }
     body {
       background: var(--white);
       color: var(--black);
       font-family: 'Heebo', sans-serif;
+      font-display: swap;
       min-height: 100vh;
       overflow-x: hidden;
       -webkit-font-smoothing: antialiased;
+      position: relative;
     }
 
-    /* ─── TOP BAR ────────────────────────────────────────── */
+    /* --- BACKGROUND WAVE ANIMATION (minimalist) ----------------- */
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background:
+        radial-gradient(ellipse 600px 200px at 20% 30%, rgba(227,30,36,0.03) 0%, transparent 70%),
+        radial-gradient(ellipse 500px 300px at 80% 70%, rgba(227,30,36,0.02) 0%, transparent 70%);
+      pointer-events: none;
+      z-index: 0;
+      animation: bgFloat 20s ease-in-out infinite alternate;
+    }
+    @keyframes bgFloat {
+      0%   { opacity: 0.6; transform: scale(1) translateY(0); }
+      100% { opacity: 1;   transform: scale(1.05) translateY(-20px); }
+    }
+    body > * { position: relative; z-index: 1; }
+
+    /* --- MUSIC NOTE PARTICLES ----------------------------------- */
+    .note-particles {
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      pointer-events: none;
+      z-index: 0;
+      overflow: hidden;
+    }
+    .note-particle {
+      position: absolute;
+      font-size: 1.2rem;
+      color: rgba(227,30,36,0.06);
+      animation: noteFloat linear infinite;
+    }
+    @keyframes noteFloat {
+      0%   { transform: translateY(100vh) rotate(0deg); opacity: 0; }
+      10%  { opacity: 1; }
+      90%  { opacity: 1; }
+      100% { transform: translateY(-10vh) rotate(360deg); opacity: 0; }
+    }
+
+    /* --- TOP BAR ------------------------------------------------ */
     .topbar {
       display: flex;
       justify-content: space-between;
@@ -64,7 +127,8 @@
       align-items: center;
       gap: 20px;
     }
-    /* ─── AVAILABILITY BADGE ─────────────────────────────── */
+
+    /* --- AVAILABILITY BADGE ------------------------------------- */
     .availability-badge {
       display: flex;
       align-items: center;
@@ -85,9 +149,13 @@
       box-shadow: 0 0 0 3px #22c55e33;
       animation: pulse 2s infinite;
     }
+    .availability-dot.shabbat {
+      background: #f59e0b;
+      box-shadow: 0 0 0 3px #f59e0b33;
+    }
     @keyframes pulse {
       0%,100% { opacity: 1; }
-      50%      { opacity: 0.5; }
+      50%     { opacity: 0.5; }
     }
 
     .topbar-link {
@@ -98,7 +166,7 @@
     }
     .topbar-link:hover { color: var(--red); }
 
-    /* ─── HERO ───────────────────────────────────────────── */
+    /* --- HERO --------------------------------------------------- */
     .hero {
       max-width: 780px;
       margin: 0 auto;
@@ -135,7 +203,7 @@
     }
     .hero h1 em { color: var(--red); font-style: normal; }
 
-    /* ─── SEASONAL STRIP ─────────────────────────────────── */
+    /* --- SEASONAL STRIP ----------------------------------------- */
     .seasonal-strip {
       display: inline-flex;
       align-items: center;
@@ -158,7 +226,7 @@
     }
     .seasonal-strip a:hover { text-decoration: underline; }
 
-    /* ─── MICRO-STORY ────────────────────────────────────── */
+    /* --- MICRO-STORY -------------------------------------------- */
     .micro-story {
       font-family: 'Frank Ruhl Libre', serif;
       font-weight: 400;
@@ -166,14 +234,57 @@
       color: var(--dark-gray);
       line-height: 1.75;
       max-width: 520px;
-      margin: 0 auto 52px;
+      margin: 0 auto 40px;
     }
 
-    /* ─── SEARCH ─────────────────────────────────────────── */
+    /* --- WEDDING SONG CTA --------------------------------------- */
+    .hero-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 18px 40px;
+      background: var(--red);
+      color: var(--white);
+      text-decoration: none;
+      font-weight: 900;
+      font-size: 1.05rem;
+      border: 2px solid var(--red);
+      transition: background 0.25s, color 0.25s, transform 0.2s, box-shadow 0.25s;
+      margin-bottom: 52px;
+      box-shadow: 0 4px 24px rgba(227,30,36,0.2);
+    }
+    .hero-cta:hover {
+      background: var(--black);
+      border-color: var(--black);
+      color: var(--white);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 32px rgba(0,0,0,0.2);
+    }
+    .hero-cta svg {
+      flex-shrink: 0;
+    }
+
+    /* --- SEARCH ------------------------------------------------- */
     .search-section {
       max-width: 700px;
-      margin: 0 auto 88px;
+      margin: 0 auto 28px;
+      padding: 0 24px;
       animation: fadeUp 0.6s 0.15s ease both;
+      /* Breathing room for dropdown inside Google Sites iframe */
+      min-height: 520px;
+    }
+
+    .search-concierge {
+      text-align: center;
+      font-size: 0.92rem;
+      color: var(--dark-gray);
+      font-weight: 300;
+      line-height: 1.7;
+      margin-bottom: 16px;
+    }
+    .search-concierge strong {
+      font-weight: 700;
+      color: var(--black);
     }
 
     .search-field-wrap {
@@ -229,7 +340,7 @@
       box-shadow: 0 28px 52px rgba(0,0,0,0.07);
     }
 
-    /* ─── DROPDOWN ───────────────────────────────────────── */
+    /* --- DROPDOWN ------------------------------------------------ */
     #search-dropdown {
       position: absolute;
       width: 100%;
@@ -324,7 +435,81 @@
     }
     .result-wa a:hover { text-decoration: underline; }
 
-    /* ─── SERVICES GRID ──────────────────────────────────── */
+    /* --- CATEGORY CUBES ----------------------------------------- */
+    .cubes-outer {
+      max-width: 1020px;
+      margin: 0 auto 64px;
+      padding: 0 24px;
+      animation: fadeUp 0.6s 0.25s ease both;
+    }
+    .cubes-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+    .cube-card {
+      background: var(--black);
+      color: var(--white);
+      padding: 36px 28px 32px;
+      text-decoration: none;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 14px;
+      transition: background 0.3s, transform 0.2s, box-shadow 0.3s;
+      position: relative;
+      overflow: hidden;
+    }
+    .cube-card::after {
+      content: '';
+      position: absolute;
+      top: 0; right: 0;
+      width: 4px; height: 100%;
+      background: var(--red);
+      transform: scaleY(0);
+      transform-origin: top;
+      transition: transform 0.3s ease;
+    }
+    .cube-card:hover::after { transform: scaleY(1); }
+    .cube-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 16px 48px rgba(0,0,0,0.15);
+    }
+    .cube-icon {
+      width: 48px; height: 48px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(227,30,36,0.12);
+      border-radius: 50%;
+      color: var(--red);
+    }
+    .cube-title {
+      font-family: 'Frank Ruhl Libre', serif;
+      font-weight: 900;
+      font-size: 1.3rem;
+      line-height: 1.2;
+    }
+    .cube-desc {
+      font-size: 0.82rem;
+      font-weight: 300;
+      color: #aaa;
+      line-height: 1.5;
+    }
+    .cube-link {
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: var(--red);
+      letter-spacing: 0.05em;
+      margin-top: auto;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: gap 0.2s;
+    }
+    .cube-card:hover .cube-link { gap: 10px; }
+
+    /* --- SERVICES GRID ------------------------------------------ */
     .section-label {
       font-size: 0.68rem;
       font-weight: 900;
@@ -386,7 +571,7 @@
     .service-card:hover .svc-icon { color: var(--red); }
     .service-card:hover .svc-sub { color: #888; }
 
-    /* ─── BONUS ZONE ─────────────────────────────────────── */
+    /* --- BONUS ZONE --------------------------------------------- */
     .bonus-zone {
       max-width: 760px;
       margin: 0 auto 96px;
@@ -435,7 +620,7 @@
       color: var(--white);
     }
 
-    /* ─── CONVERSION ZONE ────────────────────────────────── */
+    /* --- CONVERSION ZONE ---------------------------------------- */
     .conversion-zone {
       background: var(--black);
       color: var(--white);
@@ -504,7 +689,12 @@
     }
     .secondary-links a:hover { color: var(--white); border-color: var(--white); }
 
-    /* ─── FOOTER ─────────────────────────────────────────── */
+    /* --- STICKY WHATSAPP MOBILE --------------------------------- */
+    .sticky-wa {
+      display: none;
+    }
+
+    /* --- FOOTER ------------------------------------------------- */
     footer {
       background: #060606;
       text-align: center;
@@ -515,37 +705,97 @@
     footer a { color: #555; text-decoration: none; }
     footer a:hover { color: var(--red); }
 
-    /* ─── MOBILE ─────────────────────────────────────────── */
+    /* --- REDIRECT TOAST ----------------------------------------- */
+    .redirect-toast {
+      position: fixed;
+      top: 80px;
+      left: 50%;
+      transform: translateX(-50%) translateY(-20px);
+      background: var(--black);
+      color: var(--white);
+      padding: 14px 28px;
+      font-size: 0.88rem;
+      font-weight: 700;
+      z-index: 1000;
+      border-right: 4px solid var(--red);
+      box-shadow: 0 12px 40px rgba(0,0,0,0.2);
+      opacity: 0;
+      transition: opacity 0.4s, transform 0.4s;
+      direction: rtl;
+      white-space: nowrap;
+    }
+    .redirect-toast.show {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+    }
+
+    /* --- MOBILE ------------------------------------------------- */
     @media (max-width: 900px) {
       .services-grid { grid-template-columns: repeat(2, 1fr); }
       .bonus-zone { grid-template-columns: 1fr; gap: 32px; }
+      .cubes-grid { grid-template-columns: 1fr; }
+      .cube-card { padding: 28px 24px 24px; }
     }
     @media (max-width: 600px) {
       .topbar { padding: 16px 20px; }
       .hero { padding: 52px 20px 40px; }
+      .hero-cta { padding: 16px 28px; font-size: 0.95rem; }
       .services-grid { grid-template-columns: 1fr 1fr; }
       .service-card { padding: 20px 16px; font-size: 0.88rem; }
       .bonus-zone { padding: 28px 24px; margin-left: 16px; margin-right: 16px; }
       .grid-outer { padding: 0 16px; }
       .section-label { padding-right: 16px; }
+      .cubes-outer { padding: 0 16px; }
+
+      /* Sticky WhatsApp button on mobile */
+      .sticky-wa {
+        display: flex;
+        position: fixed;
+        bottom: 0;
+        left: 0; right: 0;
+        background: #25D366;
+        color: var(--white);
+        padding: 16px 24px;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        font-weight: 900;
+        font-size: 0.95rem;
+        text-decoration: none;
+        z-index: 999;
+        box-shadow: 0 -4px 20px rgba(0,0,0,0.15);
+      }
+      .sticky-wa:hover { background: #1fb855; }
+
+      /* Add bottom padding so content isn't hidden behind sticky bar */
+      footer { padding-bottom: 72px; }
     }
   </style>
 </head>
 <body>
 
-  <!-- ── TOP BAR ─────────────────────────────────────────── -->
+  <!-- Music note particles (decorative) -->
+  <div class="note-particles" aria-hidden="true" id="noteParticles"></div>
+
+  <!-- Redirect toast -->
+  <div class="redirect-toast" id="redirectToast"></div>
+
+  <!-- ARIA live region for search announcements -->
+  <div aria-live="polite" aria-atomic="true" id="srAnnounce" class="sr-only" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;"></div>
+
+  <!-- -- TOP BAR ------------------------------------------------ -->
   <nav class="topbar">
-    <a href="https://www.yakircohen.com/home" class="brand">YAKIR COHEN<em>.</em></a>
+    <a href="https://www.yakircohen.com/home" target="_top" class="brand">YAKIR COHEN<em>.</em></a>
     <div class="topbar-right">
       <div class="availability-badge">
         <span class="availability-dot" id="avDot"></span>
         <span id="avText">בודק זמינות...</span>
       </div>
-      <a href="https://www.yakircohen.com/home" class="topbar-link">דף הבית ←</a>
+      <a href="https://www.yakircohen.com/home" target="_top" class="topbar-link">דף הבית &#8592;</a>
     </div>
   </nav>
 
-  <!-- ── HERO ───────────────────────────────────────────── -->
+  <!-- -- HERO --------------------------------------------------- -->
   <section class="hero">
     <div class="hero-kicker">שגיאה 404</div>
     <h1>הקצב<br>השתנה<em>.</em></h1>
@@ -559,21 +809,32 @@
     <!-- MICRO-STORY -->
     <p class="micro-story">
       לפעמים הטעות היא ההתחלה של משהו יפה.<br>
-      בדיוק כמו שיר שמתחיל בהיסוס – ומסתיים בהרמוניה.<br>
+      בדיוק כמו שיר שמתחיל בהיסוס - ומסתיים בהרמוניה.<br>
       בוא נכתוב את ההמשך יחד.
     </p>
+
+    <!-- WEDDING SONG CTA -->
+    <a href="https://www.yakircohen.com/bride-groom-blessing" target="_top" class="hero-cta">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/>
+      </svg>
+      מחפשים שיר כניסה לחופה? למאגר המלא
+    </a>
   </section>
 
-  <!-- ── SEARCH ──────────────────────────────────────────── -->
+  <!-- -- SEARCH ------------------------------------------------- -->
   <div class="search-section">
+    <p class="search-concierge">
+      <strong>אופס, הלכת לאיבוד בין הצלילים?</strong><br>
+      כתוב לי מה אתה מחפש (למשל: "ברכת כלה" או "פלייבק") ואמצא לך מיד.
+    </p>
     <div class="search-field-wrap">
-
       <!-- Search icon SVG -->
       <svg class="search-icon-svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
         <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
       </svg>
 
-      <input type="text" id="search-input" placeholder="חפש שירות, קורס, אולפן..." autocomplete="off" aria-label="חיפוש שירותים" aria-haspopup="listbox">
+      <input type="text" id="search-input" placeholder="חפש שירות, שיר, אולפן..." autocomplete="off" aria-label="חיפוש שירותים" aria-haspopup="listbox" aria-controls="search-dropdown">
 
       <!-- Voice search button -->
       <button class="voice-btn" id="voice-btn" title="חיפוש קולי" aria-label="חיפוש קולי">
@@ -589,12 +850,55 @@
     </div>
   </div>
 
-  <!-- ── SERVICES GRID ───────────────────────────────────── -->
+  <!-- -- CATEGORY CUBES ----------------------------------------- -->
+  <div class="cubes-outer">
+    <div class="cubes-grid">
+
+      <a href="https://www.yakircohen.com/studio" target="_top" class="cube-card">
+        <div class="cube-icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 1 0 6 0V5a3 3 0 0 0-3-3Z"/>
+            <path d="M19 10v2a7 7 0 0 1-14 0v-2"/>
+            <line x1="12" x2="12" y1="19" y2="22"/>
+          </svg>
+        </div>
+        <span class="cube-title">אולפן הקלטות</span>
+        <span class="cube-desc">שיר במתנה, הקלטת ברכות, עיבוד מוזיקלי</span>
+        <span class="cube-link">לאולפן &#8592;</span>
+      </a>
+
+      <a href="https://www.yakircohen.com/bride-groom-blessing" target="_top" class="cube-card">
+        <div class="cube-icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/>
+          </svg>
+        </div>
+        <span class="cube-title">תוכן לאירועים</span>
+        <span class="cube-desc">שירי כניסה לחופה, ברכת כלה, שירים מותאמים</span>
+        <span class="cube-link">לשירים &#8592;</span>
+      </a>
+
+      <a href="https://www.yakircohen.com/events/dj-events" target="_top" class="cube-card">
+        <div class="cube-icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M3 18v-6a9 9 0 0 1 18 0v6"/>
+            <path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"/>
+          </svg>
+        </div>
+        <span class="cube-title">הפקה מוזיקלית</span>
+        <span class="cube-desc">תקליטן לאירועים, פלייבקים, עיבודים</span>
+        <span class="cube-link">להפקות &#8592;</span>
+      </a>
+
+    </div>
+  </div>
+
+  <!-- -- SERVICES GRID ------------------------------------------ -->
   <div class="grid-outer">
-    <p class="section-label">השירותים הפופולריים</p>
+    <p class="section-label">כל השירותים</p>
     <div class="services-grid">
 
-      <a href="https://www.yakircohen.com/studio" class="service-card">
+      <a href="https://www.yakircohen.com/studio" target="_top" class="service-card">
         <svg class="svc-icon" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
           <path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 1 0 6 0V5a3 3 0 0 0-3-3Z"/>
           <path d="M19 10v2a7 7 0 0 1-14 0v-2"/>
@@ -604,7 +908,7 @@
         <span class="svc-sub">Studio</span>
       </a>
 
-      <a href="https://www.yakircohen.com/studio/recording-song-modiin" class="service-card">
+      <a href="https://www.yakircohen.com/studio/recording-song-modiin" target="_top" class="service-card">
         <svg class="svc-icon" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
           <path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/>
         </svg>
@@ -612,7 +916,7 @@
         <span class="svc-sub">Recording</span>
       </a>
 
-      <a href="https://www.yakircohen.com/events/dj-events" class="service-card">
+      <a href="https://www.yakircohen.com/events/dj-events" target="_top" class="service-card">
         <svg class="svc-icon" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
           <path d="M3 18v-6a9 9 0 0 1 18 0v6"/><path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"/>
         </svg>
@@ -620,7 +924,7 @@
         <span class="svc-sub">DJ Events</span>
       </a>
 
-      <a href="https://www.yakircohen.com/attractions" class="service-card">
+      <a href="https://www.yakircohen.com/attractions" target="_top" class="service-card">
         <svg class="svc-icon" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
           <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
         </svg>
@@ -628,7 +932,7 @@
         <span class="svc-sub">Attractions</span>
       </a>
 
-      <a href="https://www.yakircohen.com/attractions/cold-fireworks" class="service-card">
+      <a href="https://www.yakircohen.com/attractions/cold-fireworks" target="_top" class="service-card">
         <svg class="svc-icon" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
           <line x1="12" y1="2" x2="12" y2="6"/><line x1="12" y1="18" x2="12" y2="22"/><line x1="4.93" y1="4.93" x2="7.76" y2="7.76"/><line x1="16.24" y1="16.24" x2="19.07" y2="19.07"/><line x1="2" y1="12" x2="6" y2="12"/><line x1="18" y1="12" x2="22" y2="12"/><line x1="4.93" y1="19.07" x2="7.76" y2="16.24"/><line x1="16.24" y1="7.76" x2="19.07" y2="4.93"/>
         </svg>
@@ -636,7 +940,7 @@
         <span class="svc-sub">Cold Fireworks</span>
       </a>
 
-      <a href="https://www.yakircohen.com/video/bar-mitzvah-clip" class="service-card">
+      <a href="https://www.yakircohen.com/video/bar-mitzvah-clip" target="_top" class="service-card">
         <svg class="svc-icon" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
           <polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/>
         </svg>
@@ -644,7 +948,7 @@
         <span class="svc-sub">Bar Mitzvah Clip</span>
       </a>
 
-      <a href="https://www.yakircohen.com/business/professional-voiceover" class="service-card">
+      <a href="https://www.yakircohen.com/business/professional-voiceover" target="_top" class="service-card">
         <svg class="svc-icon" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
           <path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/>
         </svg>
@@ -652,7 +956,7 @@
         <span class="svc-sub">Voiceover</span>
       </a>
 
-      <a href="https://www.yakircohen.com/academy/dj-course" class="service-card">
+      <a href="https://www.yakircohen.com/academy/dj-course" target="_top" class="service-card">
         <svg class="svc-icon" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
           <circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="3"/><line x1="12" y1="2" x2="12" y2="5"/><line x1="12" y1="19" x2="12" y2="22"/>
         </svg>
@@ -663,14 +967,14 @@
     </div>
   </div>
 
-  <!-- ── BONUS ZONE ──────────────────────────────────────── -->
+  <!-- -- BONUS ZONE --------------------------------------------- -->
   <div class="bonus-zone">
 
     <!-- Micro-story / philosophy block -->
     <div class="bonus-block">
       <span class="bonus-block-title">הפילוסופיה שלנו</span>
       <p>
-        "גם בטעות יש לוגיקה – בוא נמצא אותה יחד.<br>
+        "גם בטעות יש לוגיקה - בוא נמצא אותה יחד.<br>
         15 דקות ייעוץ אישי עם יקיר, ללא עלות. זה על הבית."
       </p>
       <a href="https://wa.me/972587555456?text=היי%20יקיר%2C%20הגעתי%20לעמוד%20404%20ואשמח%20לשיחת%20ייעוץ%20אישי%20במתנה" target="_blank" rel="noopener">
@@ -679,14 +983,14 @@
       </a>
     </div>
 
-    <!-- Gift / Lead-gen block -->
+    <!-- Lead Magnet block - links to /order -->
     <div class="bonus-block">
       <span class="bonus-block-title">מתנה קטנה ממני</span>
       <p>
-        מחפש תקליטן? הורד את המדריך החינמי שלי:<br>
-        "5 שאלות שחייבים לשאול לפני שבוחרים תקליטן לחתונה".
+        חבל שהגעת לעמוד ריק - בוא נמתיק את זה:<br>
+        הצצה למחירון + טיפים לבחירת שיר כניסה לחופה.
       </p>
-      <a href="https://www.yakircohen.com/order" target="_blank" rel="noopener">
+      <a href="https://www.yakircohen.com/order" target="_top">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
         ראה מחירון שירותים
       </a>
@@ -694,119 +998,205 @@
 
   </div>
 
-  <!-- ── CONVERSION ZONE ─────────────────────────────────── -->
+  <!-- -- CONVERSION ZONE ---------------------------------------- -->
   <section class="conversion-zone">
     <div class="reward-tag">מתנה לדרך</div>
     <h2>ייעוץ מוזיקלי<br>במתנה<em>.</em></h2>
-    <p>הגעת לכאן בטעות? הרווחת 15 דקות ייעוץ אישי עם יקיר – ללא עלות, ללא התחייבות.</p>
+    <p>הגעת לכאן בטעות? הרווחת 15 דקות ייעוץ אישי עם יקיר - ללא עלות, ללא התחייבות.</p>
     <a href="https://wa.me/972587555456?text=היי%20יקיר%2C%20הגעתי%20לעמוד%20404%20ואשמח%20לשיחת%20ייעוץ%20במתנה%20%F0%9F%8E%B5" class="btn-wa" target="_blank" rel="noopener">
       <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
       דבר ישירות עם יקיר ב-WhatsApp
     </a>
     <div class="secondary-links">
       <a href="https://www.instagram.com/yakir.cohen.official/" target="_blank" rel="noopener">אינסטגרם</a>
-      <a href="https://www.yakircohen.com/order">מחירון</a>
-      <a href="https://www.yakircohen.com/home">דף הבית</a>
+      <a href="https://www.yakircohen.com/order" target="_top">מחירון</a>
+      <a href="https://www.yakircohen.com/home" target="_top">דף הבית</a>
     </div>
   </section>
 
   <footer>
-    © יקיר כהן הפקות &nbsp;·&nbsp; <a href="https://www.instagram.com/yakir.cohen.official" target="_blank">Instagram</a>
+    &copy; יקיר כהן הפקות &nbsp;&middot;&nbsp; <a href="https://www.instagram.com/yakir.cohen.official" target="_blank">Instagram</a>
   </footer>
 
-  <!-- ── JAVASCRIPT ───────────────────────────────────────── -->
+  <!-- Sticky WhatsApp for mobile -->
+  <a href="https://wa.me/972587555456?text=היי%20יקיר%2C%20הגעתי%20לעמוד%20404%20ואשמח%20לעזרה" class="sticky-wa" target="_blank" rel="noopener">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+    שלח הודעה ליקיר
+  </a>
+
+  <!-- -- JAVASCRIPT --------------------------------------------- -->
   <script>
   (function () {
     'use strict';
 
-    /* ── 1. CONSTANTS ─────────────────────────────────── */
-    const JSON_URL    = 'https://raw.githubusercontent.com/yakir-c/yakircohenprudoctions/main/search-index.json';
-    const WA_BASE     = 'https://wa.me/972587555456?text=';
-    const WA_CONSULT  = 'היי%20יקיר%2C%20הגעתי%20לעמוד%20404%20ואשמח%20לשיחת%20ייעוץ%20אישית%20במתנה';
-    const POPULAR     = ['תקליטן לחתונה', 'אולפן ירושלים', 'זיקוקים קרים', 'הקלטת שיר לאמא'];
+    /* -- 1. CONSTANTS ----------------------------------------- */
+    var JSON_URL    = 'https://raw.githubusercontent.com/yakir-c/yakircohenprudoctions/main/search-index.json';
+    var WA_BASE     = 'https://wa.me/972587555456?text=';
+    var POPULAR     = ['שיר כניסה לחופה', 'תקליטן לחתונה', 'אולפן ירושלים', 'פלייבק', 'מחירון'];
+    var SITE_BASE   = 'https://www.yakircohen.com';
 
-    /* ── 2. SEASONAL CONTENT ──────────────────────────── */
-    const seasonalMap = [
+    /* -- 2. MUSIC NOTE PARTICLES (decorative) ----------------- */
+    (function spawnNotes() {
+      var container = document.getElementById('noteParticles');
+      if (!container) return;
+      var notes = ['\u266A', '\u266B', '\u266C', '\u2669'];
+      for (var i = 0; i < 8; i++) {
+        var span = document.createElement('span');
+        span.className = 'note-particle';
+        span.textContent = notes[i % notes.length];
+        span.style.left = (Math.random() * 100) + '%';
+        span.style.animationDuration = (15 + Math.random() * 20) + 's';
+        span.style.animationDelay = (Math.random() * 15) + 's';
+        span.style.fontSize = (0.8 + Math.random() * 1.2) + 'rem';
+        container.appendChild(span);
+      }
+    })();
+
+    /* -- 3. SEASONAL CONTENT ---------------------------------- */
+    var seasonalMap = [
       { months: [2, 3],    text: 'הקלטת שיר לאמא ליום האם הקרב',          url: '/bride-groom-blessing' },
-      { months: [4, 5],    text: 'חבילת חתונת אביב – תקליטן + זיקוקים',   url: '/dj-events' },
-      { months: [6, 7, 8], text: 'בר/בת מצווה בקיץ – אולפן + קליפ',       url: '/bar-mitzvah-clip' },
-      { months: [9, 10],   text: 'אירועי חגי תשרי – הפקה מלאה',            url: '/attractions' },
-      { months: [11, 0, 1],text: 'אירועי סוף שנה וחברה',                    url: '/dj-events' },
+      { months: [4, 5],    text: 'חבילת חתונת אביב - תקליטן + זיקוקים',   url: '/dj-events' },
+      { months: [6, 7, 8], text: 'בר/בת מצווה בקיץ - אולפן + קליפ',       url: '/bar-mitzvah-clip' },
+      { months: [9, 10],   text: 'אירועי חגי תשרי - הפקה מלאה',            url: '/attractions' },
+      { months: [11, 0, 1],text: 'אירועי סוף שנה וחברה',                    url: '/dj-events' }
     ];
 
-    const month = new Date().getMonth();
-    const seasonal = seasonalMap.find(s => s.months.includes(month));
-    const seasonalEl = document.getElementById('seasonal-text');
+    var month = new Date().getMonth();
+    var seasonal = seasonalMap.find(function(s) { return s.months.indexOf(month) !== -1; });
+    var seasonalEl = document.getElementById('seasonal-text');
     if (seasonal && seasonalEl) {
-      seasonalEl.innerHTML = `עכשיו פופולרי: <strong>${seasonal.text}</strong> – <a href="https://www.yakircohen.com${seasonal.url}">בואו נדבר ←</a>`;
+      seasonalEl.innerHTML = '\u05E2\u05DB\u05E9\u05D9\u05D5 \u05E4\u05D5\u05E4\u05D5\u05DC\u05E8\u05D9: <strong>' + seasonal.text + '</strong> \u2013 <a href="' + SITE_BASE + seasonal.url + '" target="_top">\u05D1\u05D5\u05D0\u05D5 \u05E0\u05D3\u05D1\u05E8 \u2190</a>';
     } else if (seasonalEl) {
       document.getElementById('seasonal-strip').style.display = 'none';
     }
 
-    /* ── 3. AVAILABILITY TIMER ────────────────────────── */
-    (function setAvailability () {
-      const hour  = new Date().getHours();
-      const avail = hour >= 9 && hour <= 20;
-      const dot   = document.getElementById('avDot');
-      const text  = document.getElementById('avText');
-      if (dot)  dot.classList.toggle('online', avail);
-      if (text) text.textContent = avail ? 'זמין עכשיו' : 'חזור ב-9:00';
+    /* -- 4. AVAILABILITY TIMER (Shabbat-aware) ---------------- */
+    (function setAvailability() {
+      var now   = new Date();
+      var day   = now.getDay();   // 0=Sun, 5=Fri, 6=Sat
+      var hour  = now.getHours();
+      var dot   = document.getElementById('avDot');
+      var text  = document.getElementById('avText');
+
+      var isShabbat = false;
+      var shabbatMsg = '';
+
+      // Friday after 14:00
+      if (day === 5 && hour >= 14) {
+        isShabbat = true;
+        shabbatMsg = '\u05E9\u05D1\u05EA \u05E9\u05DC\u05D5\u05DD \u2013 \u05E0\u05D7\u05D6\u05D5\u05E8 \u05D1\u05DE\u05D5\u05E6"\u05E9';
+      }
+      // All Saturday
+      else if (day === 6) {
+        isShabbat = true;
+        shabbatMsg = '\u05E9\u05D1\u05EA \u05E9\u05DC\u05D5\u05DD \u2013 \u05E0\u05D7\u05D6\u05D5\u05E8 \u05D1\u05DE\u05D5\u05E6"\u05E9';
+      }
+
+      if (isShabbat) {
+        if (dot)  { dot.classList.remove('online'); dot.classList.add('shabbat'); }
+        if (text) text.textContent = shabbatMsg;
+      } else {
+        var avail = hour >= 9 && hour <= 20;
+        if (dot)  dot.classList.toggle('online', avail);
+        if (text) text.textContent = avail ? '\u05D6\u05DE\u05D9\u05DF \u05E2\u05DB\u05E9\u05D9\u05D5' : '\u05D7\u05D6\u05D5\u05E8 \u05D1-9:00';
+      }
     })();
 
-    /* ── 4. LOAD SEARCH INDEX ─────────────────────────── */
-    let searchIndex = [];
+    /* -- 5. AUTO-REDIRECT (smart URL matching) ---------------- */
+    (function autoRedirect() {
+      var path = window.location.pathname.toLowerCase();
+      var hash = (window.location.hash || '').toLowerCase();
+      var full = path + ' ' + hash;
+
+      var redirectMap = [
+        { keywords: ['studio', 'אולפן', 'הקלטה', 'recording'],       url: '/studio' },
+        { keywords: ['dj', 'תקליטן', 'אירוע', 'events'],             url: '/events/dj-events' },
+        { keywords: ['bride', 'groom', 'חופה', 'כלה', 'חתן', 'blessing', 'שיר-כניסה'], url: '/bride-groom-blessing' },
+        { keywords: ['fireworks', 'זיקוק', 'cold'],                   url: '/attractions/cold-fireworks' },
+        { keywords: ['attraction', 'אטרקצי'],                         url: '/attractions' },
+        { keywords: ['bar-mitzvah', 'בר-מצווה', 'clip', 'קליפ'],     url: '/video/bar-mitzvah-clip' },
+        { keywords: ['voiceover', 'קריינ'],                           url: '/business/professional-voiceover' },
+        { keywords: ['course', 'קורס', 'academy'],                    url: '/academy/dj-course' },
+        { keywords: ['order', 'מחיר', 'הזמנ'],                        url: '/order' },
+        { keywords: ['contact', 'צור-קשר', 'יצירת-קשר'],             url: '/contact' }
+      ];
+
+      for (var i = 0; i < redirectMap.length; i++) {
+        var entry = redirectMap[i];
+        for (var j = 0; j < entry.keywords.length; j++) {
+          if (full.indexOf(entry.keywords[j]) !== -1) {
+            // Show toast, then redirect
+            var toast = document.getElementById('redirectToast');
+            var targetUrl = SITE_BASE + entry.url;
+            if (toast) {
+              toast.textContent = '\u05DE\u05E2\u05D1\u05D9\u05E8 \u05D0\u05D5\u05EA\u05DA \u05DC\u05E2\u05DE\u05D5\u05D3 \u05D4\u05E0\u05DB\u05D5\u05DF...';
+              toast.classList.add('show');
+            }
+            setTimeout(function() {
+              window.top.location.href = targetUrl;
+            }, 1800);
+            return;
+          }
+        }
+      }
+    })();
+
+    /* -- 6. LOAD SEARCH INDEX --------------------------------- */
+    var searchIndex = [];
     fetch(JSON_URL)
-      .then(r => r.json())
-      .then(data => {
-        // clean any accidental whitespace from keys
-        searchIndex = data.map(item => {
-          const clean = {};
-          for (const [k, v] of Object.entries(item)) clean[k.trim()] = v;
+      .then(function(r) { return r.json(); })
+      .then(function(data) {
+        searchIndex = data.map(function(item) {
+          var clean = {};
+          for (var k in item) {
+            if (item.hasOwnProperty(k)) clean[k.trim()] = item[k];
+          }
           return clean;
         });
       })
-      .catch(() => { /* silent – search still works with empty index */ });
+      .catch(function() { /* silent */ });
 
-    /* ── 5. SEARCH UI ─────────────────────────────────── */
-    const input    = document.getElementById('search-input');
-    const dropdown = document.getElementById('search-dropdown');
+    /* -- 7. SEARCH UI ----------------------------------------- */
+    var input    = document.getElementById('search-input');
+    var dropdown = document.getElementById('search-dropdown');
+    var srAnnounce = document.getElementById('srAnnounce');
 
-    function esc (str) {
+    function esc(str) {
       return str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
     }
-    function hl (text, q) {
+    function hl(text, q) {
       if (!q) return text;
-      return text.replace(new RegExp(`(${esc(q)})`, 'gi'), '<mark>$1</mark>');
+      return text.replace(new RegExp('(' + esc(q) + ')', 'gi'), '<mark>$1</mark>');
     }
 
-    function openDropdown (html) {
+    function openDropdown(html) {
       dropdown.innerHTML = html;
       dropdown.classList.add('open');
     }
-    function closeDropdown () {
+    function closeDropdown() {
       dropdown.classList.remove('open');
       dropdown.innerHTML = '';
     }
 
     /* zero-state on focus */
-    input.addEventListener('focus', () => {
+    input.addEventListener('focus', function() {
       if (!input.value.trim()) showZeroState();
     });
 
-    function showZeroState () {
-      const chips = POPULAR.map(q =>
-        `<button class="chip" data-q="${q}">${q}</button>`
-      ).join('');
-      openDropdown(`
-        <div class="zero-state">
-          <span class="zero-label">חיפושים נפוצים</span>
-          <div class="chips">${chips}</div>
-        </div>`);
+    function showZeroState() {
+      var chips = POPULAR.map(function(q) {
+        return '<button class="chip" data-q="' + q + '">' + q + '</button>';
+      }).join('');
+      openDropdown(
+        '<div class="zero-state">' +
+          '<span class="zero-label">\u05D7\u05D9\u05E4\u05D5\u05E9\u05D9\u05DD \u05E0\u05E4\u05D5\u05E6\u05D9\u05DD</span>' +
+          '<div class="chips">' + chips + '</div>' +
+        '</div>');
     }
 
     /* chip click */
-    dropdown.addEventListener('click', e => {
-      const chip = e.target.closest('.chip');
+    dropdown.addEventListener('click', function(e) {
+      var chip = e.target.closest('.chip');
       if (chip) {
         input.value = chip.dataset.q;
         runSearch(chip.dataset.q);
@@ -814,80 +1204,89 @@
     });
 
     /* debounced input */
-    let timer;
-    input.addEventListener('input', () => {
+    var timer;
+    input.addEventListener('input', function() {
       clearTimeout(timer);
-      const val = input.value.trim();
+      var val = input.value.trim();
       if (!val) { showZeroState(); return; }
-      timer = setTimeout(() => runSearch(val), 200);
+      timer = setTimeout(function() { runSearch(val); }, 200);
     });
 
-    function runSearch (query) {
-      const q = query.toLowerCase();
-      const results = searchIndex
-        .filter(item =>
-          (item.title  || '').toLowerCase().includes(q) ||
-          (item.description || '').toLowerCase().includes(q) ||
-          (item.keywords || []).some(k => k.toLowerCase().includes(q))
-        )
+    function runSearch(query) {
+      var q = query.toLowerCase();
+      var results = searchIndex
+        .filter(function(item) {
+          return (item.title || '').toLowerCase().indexOf(q) !== -1 ||
+                 (item.description || '').toLowerCase().indexOf(q) !== -1 ||
+                 (item.keywords || []).some(function(k) { return k.toLowerCase().indexOf(q) !== -1; });
+        })
         .slice(0, 8);
 
-      const rows = results.map(item => `
-        <a class="result-row" href="${item.url}" role="option">
-          <div class="result-info">
-            <span class="result-title">${hl(item.title, query)}</span>
-            <span class="result-cat">${item.category}</span>
-          </div>
-          <svg class="result-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <polyline points="15 18 9 12 15 6"/>
-          </svg>
-        </a>`).join('');
+      /* target="_top" on all search result links */
+      var rows = results.map(function(item) {
+        return '<a class="result-row" href="' + item.url + '" target="_top" role="option">' +
+          '<div class="result-info">' +
+            '<span class="result-title">' + hl(item.title, query) + '</span>' +
+            '<span class="result-cat">' + item.category + '</span>' +
+          '</div>' +
+          '<svg class="result-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">' +
+            '<polyline points="15 18 9 12 15 6"/>' +
+          '</svg>' +
+        '</a>';
+      }).join('');
 
-      const waText = encodeURIComponent(`היי יקיר, חיפשתי "${query}" באתר ולא מצאתי. אפשר עזרה?`);
-      const waRow = `
-        <div class="result-wa">
-          <p>${results.length === 0 ? `לא מצאנו תוצאות עבור "${query}"` : 'לא מצאת מה שחיפשת?'}</p>
-          <a href="${WA_BASE}${waText}" target="_blank" rel="noopener">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
-            שאל את יקיר ישירות ב-WhatsApp
-          </a>
-        </div>`;
+      var waText = encodeURIComponent('\u05D4\u05D9\u05D9 \u05D9\u05E7\u05D9\u05E8, \u05D7\u05D9\u05E4\u05E9\u05EA\u05D9 "' + query + '" \u05D1\u05D0\u05EA\u05E8 \u05D5\u05DC\u05D0 \u05DE\u05E6\u05D0\u05EA\u05D9. \u05D0\u05E4\u05E9\u05E8 \u05E2\u05D6\u05E8\u05D4?');
+      var waRow =
+        '<div class="result-wa">' +
+          '<p>' + (results.length === 0 ? '\u05DC\u05D0 \u05DE\u05E6\u05D0\u05E0\u05D5 \u05EA\u05D5\u05E6\u05D0\u05D5\u05EA \u05E2\u05D1\u05D5\u05E8 "' + query + '"' : '\u05DC\u05D0 \u05DE\u05E6\u05D0\u05EA \u05DE\u05D4 \u05E9\u05D7\u05D9\u05E4\u05E9\u05EA?') + '</p>' +
+          '<a href="' + WA_BASE + waText + '" target="_blank" rel="noopener">' +
+            '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>' +
+            '\u05E9\u05D0\u05DC \u05D0\u05EA \u05D9\u05E7\u05D9\u05E8 \u05D9\u05E9\u05D9\u05E8\u05D5\u05EA \u05D1-WhatsApp' +
+          '</a>' +
+        '</div>';
 
       openDropdown(rows + waRow);
+
+      // Accessibility announcement
+      if (srAnnounce) {
+        srAnnounce.textContent = results.length > 0
+          ? '\u05E0\u05DE\u05E6\u05D0\u05D5 ' + results.length + ' \u05EA\u05D5\u05E6\u05D0\u05D5\u05EA'
+          : '\u05DC\u05D0 \u05E0\u05DE\u05E6\u05D0\u05D5 \u05EA\u05D5\u05E6\u05D0\u05D5\u05EA';
+      }
     }
 
     /* close on outside click */
-    document.addEventListener('click', e => {
+    document.addEventListener('click', function(e) {
       if (!e.target.closest('.search-section')) closeDropdown();
     });
-    document.addEventListener('keydown', e => {
+    document.addEventListener('keydown', function(e) {
       if (e.key === 'Escape') closeDropdown();
     });
 
-    /* ── 6. VOICE SEARCH ──────────────────────────────── */
-    const voiceBtn = document.getElementById('voice-btn');
-    const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
+    /* -- 8. VOICE SEARCH -------------------------------------- */
+    var voiceBtn = document.getElementById('voice-btn');
+    var SR = window.SpeechRecognition || window.webkitSpeechRecognition;
 
     if (SR) {
-      const recognition = new SR();
+      var recognition = new SR();
       recognition.lang = 'he-IL';
       recognition.interimResults = false;
       recognition.maxAlternatives = 1;
 
-      voiceBtn.addEventListener('click', () => {
+      voiceBtn.addEventListener('click', function() {
         voiceBtn.classList.add('listening');
+        if (srAnnounce) srAnnounce.textContent = '\u05DE\u05D0\u05D6\u05D9\u05DF...';
         recognition.start();
       });
-      recognition.onresult = e => {
-        const transcript = e.results[0][0].transcript;
+      recognition.onresult = function(e) {
+        var transcript = e.results[0][0].transcript;
         input.value = transcript;
         runSearch(transcript);
         voiceBtn.classList.remove('listening');
       };
-      recognition.onerror  = () => voiceBtn.classList.remove('listening');
-      recognition.onend    = () => voiceBtn.classList.remove('listening');
+      recognition.onerror  = function() { voiceBtn.classList.remove('listening'); };
+      recognition.onend    = function() { voiceBtn.classList.remove('listening'); };
     } else {
-      // hide voice btn if not supported
       voiceBtn.style.display = 'none';
     }
 
